@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{#<p> 直接取值 </p>#}
+{#<ul>#}
+{#    <li> {{ n1 }} </li>#}
+{#    <li> {{ n2 }} </li>#}
+{#</ul>#}
+{##}
+{#<p> 取列表值 </p>#}
+{#<ul>#}
+{#    <li> {{ n2.0 }} </li>#}
+{#    <li> {{ n2.1 }} </li>#}
+{#</ul>#}
+{##}
+{#<p> 循环展示 </p>#}
+{#<ul>#}
+{#    {% for item in n2 %}#}
+{#        <li> {{ item }} </li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{##}
+{#<ul>#}
+{#    {% for k, v in n3.items %}#}
+{#        <li> {{ k }} = {{ v }} </li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{##}
+{#<p> 条件 </p>#}
+{#{% if n1 == 'xxx'%}#}
+{#    <h1> V1 </h1>#}
+{#{% elif n1 == 'xx' %}#}
+{#    <h1> V2 </h1>#}
+{#{% else %}#}
+{#    <h1> V3 </h1>#}
+{#{% endif %}#}
+
+<div id="message" style="height: 500px; width: 500px; border: 1px solid blue;"></div>
+
+<div>
+    <input type="text" placeholder="请输入" id="msg">
+    <input type="button" value="发送" onclick="sendMsg()">
+    <input type="button" value="关闭连接" onclick="closeConn()">
+</div>
+
+<script>
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/connect/')
+    let message = document.getElementById('message')
+    let msg = document.getElementById('msg')
+
+    {# 创建好连接后自动触发, 服务端执行 self.accept() #}
+    socket.onopen = function (event) {
+        message.innerText = '连接成功\n'
+    }
+
+    function sendMsg() {
+        socket.send(msg.value)
+        msg.value = ''
+    }
+
+    {# 当 WebSocket 接收到服务端返回的消息时自动触发 #}
+    socket.onmessage = function (event) {
+        message.innerText += event.data + '\n'
+    }
+
+    function closeConn() {
+        socket.close()
+    }
+
+    socket.onclose = function (event) {
+        message.innerText += '连接关闭'
+    }
+</script>
+</body>
+</html>

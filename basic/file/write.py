@@ -1,0 +1,11 @@
+file = open('a.txt', 'r+', encoding='UTF-8')
+print(file.read(1))
+file.seek(0)
+print(file.readline())
+file.seek(0)
+print(file.readlines())
+
+file.write('world')
+file.seek(0)
+print(file.readlines())
+file.close()
