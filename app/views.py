@@ -5,7 +5,8 @@ import json
 
 
 def index(request):
-    return render(request, 'index.html')
+    group_id = request.GET.get('group_id')
+    return render(request, 'index.html', {'group_id': group_id})
 
 # @csrf_exempt
 # def index(request):

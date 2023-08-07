@@ -27,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
+# 注册 APP
 INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'fan_py_learning.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
+# 数据库连接
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -122,7 +122,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+# 模板文件位置
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -130,4 +130,21 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# 支持 ASGI
 ASGI_APPLICATION = 'fan_py_learning.asgi.application'
+
+# CHANNEL_LAYERS 功能
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
+
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [{'124.222.118.90', 6379}]
+#         }
+#     }
+# }
