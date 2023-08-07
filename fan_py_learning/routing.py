@@ -1,3 +1,5 @@
+# WebSocket 路由
+
 from django.urls import re_path
 
 from app import consumers
